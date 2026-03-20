@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GigShield | Login</title>
+    <style>
+      :root {
+        --bg-1: #0f172a;
+        --bg-2: #1e3a8a;
+        --bg-3: #7c3aed;
+        --accent: #22d3ee;
+        --accent-2: #a78bfa;
+        --accent-3: #60a5fa;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --card: rgba(15, 23, 42, 0.66);
+        --border: rgba(148, 163, 184, 0.22);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 20% 20%, #22d3ee 0%, transparent 28%),
+          radial-gradient(circle at 80% 10%, #a78bfa 0%, transparent 30%),
+          radial-gradient(circle at 50% 95%, #2563eb 0%, transparent 35%),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+        overflow: hidden;
+        padding: 24px;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        z-index: -1;
+        width: 340px;
+        height: 340px;
+        border-radius: 999px;
+        filter: blur(60px);
+        opacity: 0.35;
+        pointer-events: none;
+        animation: floatGlow 10s ease-in-out infinite;
+      }
+
+      body::before {
+        background: #22d3ee;
+        top: -80px;
+        right: -60px;
+      }
+
+      body::after {
+        background: #a78bfa;
+        bottom: -90px;
+        left: -70px;
+        animation-delay: -5s;
+      }
+
+      @keyframes floatGlow {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
+        }
+        50% {
+          transform: translateY(-12px) scale(1.04);
+        }
+      }
+
+      .login-card {
+        position: relative;
+        width: min(420px, 100%);
+        background: var(--card);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 30px;
+        box-shadow: 0 24px 60px rgba(2, 6, 23, 0.5);
+      }
+
+      .login-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 22px;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(34, 211, 238, 0.45), rgba(167, 139, 250, 0.22), rgba(96, 165, 250, 0.35));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      .brand {
+        margin-bottom: 22px;
+        text-align: center;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 2rem;
+        line-height: 1.2;
+        letter-spacing: 0.4px;
+        background: linear-gradient(90deg, #22d3ee, #a78bfa, #60a5fa, #22d3ee);
+        background-size: 260% 260%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: flowGradient 5s ease infinite;
+      }
+
+      @keyframes flowGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .brand p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      form {
+        display: grid;
+        gap: 16px;
+      }
+
+      label {
+        font-size: 0.9rem;
+        color: #cbd5e1;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: rgba(15, 23, 42, 0.65);
+        color: #f8fafc;
+        padding: 13px 14px;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+      }
+
+      input::placeholder {
+        color: #94a3b8;
+      }
+
+      input:hover {
+        background: rgba(15, 23, 42, 0.72);
+      }
+
+      input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .remember {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .remember input {
+        width: auto;
+        accent-color: #22d3ee;
+      }
+
+      .meta a {
+        color: #67e8f9;
+        text-decoration: none;
+      }
+
+      .meta a:hover {
+        text-decoration: underline;
+      }
+
+      button {
+        margin-top: 6px;
+        border: 0;
+        border-radius: 12px;
+        padding: 13px 16px;
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 0.96rem;
+        cursor: pointer;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+        background-size: 200% 100%;
+        transition: transform 0.15s ease, box-shadow 0.2s ease, background-position 0.25s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(34, 211, 238, 0.35);
+        background-position: 100% 0;
+      }
+
+      .signup {
+        margin: 18px 0 2px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .signup a {
+        color: #c4b5fd;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .signup a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="login-card" aria-label="GigShield Login Card">
+      <section class="brand">
+        <h1>GigShield Login</h1>
+        <p>Protecting the last mile. Automatically.</p>
+      </section>
+
+      <form>
+        <div class="field">
+          <label for="email">Email or Phone</label>
+          <input id="email" type="text" placeholder="Enter your email or phone" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" required />
+        </div>
+
+        <div class="meta">
+          <label class="remember" for="remember-me">
+            <input id="remember-me" type="checkbox" />
+            Remember me
+          </label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit">Sign In</button>
+      </form>
+
+      <p class="signup">New to GigShield? <a href="#">Create account</a></p>
+    </main>
+  </body>
+</html>
